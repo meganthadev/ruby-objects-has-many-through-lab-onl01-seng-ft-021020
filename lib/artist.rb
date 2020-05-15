@@ -5,18 +5,18 @@ class Artist
 
   def initialize (name)
     @name = name
+    @songs = []
     @@all << self
   end
 
   def new_song(name, genre)
-    song = Song.create(name, self, genre)
+    @songs << song
+    song.artist = self
   end
 
   def songs
-    Song.all.select do |song|
-      song.artist == self
-    end
-  end
+    @songs 
+  end   
 
   def genres
     Song.all.map do |song|
